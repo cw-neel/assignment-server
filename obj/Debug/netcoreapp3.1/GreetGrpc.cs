@@ -17,6 +17,8 @@ namespace GrpcGreeter {
 
     static readonly grpc::Marshaller<global::GrpcGreeter.HelloRequest> __Marshaller_greet_HelloRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GrpcGreeter.HelloRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::GrpcGreeter.HelloReply> __Marshaller_greet_HelloReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GrpcGreeter.HelloReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::GrpcGreeter.AddRequest> __Marshaller_greet_AddRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GrpcGreeter.AddRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::GrpcGreeter.AddResponse> __Marshaller_greet_AddResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GrpcGreeter.AddResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::GrpcGreeter.HelloRequest, global::GrpcGreeter.HelloReply> __Method_SayHello = new grpc::Method<global::GrpcGreeter.HelloRequest, global::GrpcGreeter.HelloReply>(
         grpc::MethodType.Unary,
@@ -24,6 +26,13 @@ namespace GrpcGreeter {
         "SayHello",
         __Marshaller_greet_HelloRequest,
         __Marshaller_greet_HelloReply);
+
+    static readonly grpc::Method<global::GrpcGreeter.AddRequest, global::GrpcGreeter.AddResponse> __Method_AddNumbers = new grpc::Method<global::GrpcGreeter.AddRequest, global::GrpcGreeter.AddResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "AddNumbers",
+        __Marshaller_greet_AddRequest,
+        __Marshaller_greet_AddResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -46,6 +55,11 @@ namespace GrpcGreeter {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      public virtual global::System.Threading.Tasks.Task<global::GrpcGreeter.AddResponse> AddNumbers(global::GrpcGreeter.AddRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -53,7 +67,8 @@ namespace GrpcGreeter {
     public static grpc::ServerServiceDefinition BindService(GreeterBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_SayHello, serviceImpl.SayHello).Build();
+          .AddMethod(__Method_SayHello, serviceImpl.SayHello)
+          .AddMethod(__Method_AddNumbers, serviceImpl.AddNumbers).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -63,6 +78,7 @@ namespace GrpcGreeter {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, GreeterBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_SayHello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcGreeter.HelloRequest, global::GrpcGreeter.HelloReply>(serviceImpl.SayHello));
+      serviceBinder.AddMethod(__Method_AddNumbers, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcGreeter.AddRequest, global::GrpcGreeter.AddResponse>(serviceImpl.AddNumbers));
     }
 
   }

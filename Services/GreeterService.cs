@@ -22,5 +22,11 @@ namespace GrpcGreeter
                 Message = "Hello " + request.Name
             });
         }
+
+        public override async Task<AddResponse> AddNumbers(AddRequest request, ServerCallContext context){
+            return await Task.FromResult(new AddResponse{
+                Result = request.Num1 + request.Num2
+            });
+        }
     }
 }
